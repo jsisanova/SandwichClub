@@ -3,12 +3,16 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.List;
 
 // DetailActivity displays all received Sandwich data
 public class DetailActivity extends AppCompatActivity {
@@ -16,12 +20,28 @@ public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
 
+    private ImageView sandwichImage;
+    private TextView alsoKnownAsTextView;
+    private TextView descriptionTextView;
+    private TextView ingredientsTextView;
+    private TextView placeOfOriginTextView;
+
+    private TextView alsoKnownAsLabel;
+    private TextView placeOfOriginLabel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
+        sandwichImage = findViewById(R.id.image_iv);
+        alsoKnownAsTextView = findViewById(R.id.also_known_tv);
+        descriptionTextView = findViewById(R.id.description_tv);
+        ingredientsTextView = findViewById(R.id.ingredients_tv);
+        placeOfOriginTextView = findViewById(R.id.origin_tv);
+
+        alsoKnownAsLabel = findViewById(R.id.also_known_label);
+        placeOfOriginLabel = findViewById(R.id.origin_label);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -44,12 +64,13 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        populateUI();
         Picasso.with(this)
                 .load(sandwich.getImage())
-                .into(ingredientsIv);
+                .into(sandwichImage);
 
         setTitle(sandwich.getMainName());
+
+        populateUI(sandwich);
     }
 
     private void closeOnError() {
@@ -57,7 +78,43 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void populateUI() {
+    private void populateUI(Sandwich sandwich) {
 
+        descriptionTextView.setText(sandwich.getDescription());
+
+        // If there is not known place of origin, do not display it
+        if (sandwich.getPlaceOfOrigin().isEmpty()) {
+            placeOfOriginLabel.setVisibility(View.GONE);
+            placeOfOriginTextView.setVisibility(View.GONE);
+        } else {
+            placeOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
+        }
+
+        // Get 'also known as' as a list
+        List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
+        // If there is nothing to show in 'also known as' list, do not display it
+        if (alsoKnownAsList.size() == 0) {
+            alsoKnownAsLabel.setVisibility(View.GONE);
+            alsoKnownAsTextView.setVisibility(View.GONE);
+        } else {
+            StringBuilder akaNames = new StringBuilder();
+
+            for (String akaName : alsoKnownAsList) {
+                akaNames.append(akaName).append(", ");
+            }
+            akaNames.setLength(akaNames.length() - 2);
+            alsoKnownAsTextView.setText(akaNames);
+        }
+
+        // Get 'ingredients' as a list
+        List<String> ingredientsList = sandwich.getIngredients();
+        StringBuilder ingredients = new StringBuilder();
+
+        for (String ingredient : ingredientsList) {
+            ingredients.append(ingredient).append(", ");
+        }
+        // Get rid of the 2 last characters, in this case ", "
+        ingredients.setLength(ingredients.length() - 2);
+        ingredientsTextView.setText(ingredients);
     }
 }
