@@ -1,4 +1,4 @@
-# Sandwich Club e
+# Sandwich Club 
 
 ## Project Overview
 Sandwich Club App , created as a part of Udacity Android Developer Nanodegree Program.
