@@ -34,6 +34,7 @@ public class JsonUtils {
             //set object values
             sandwich.setMainName(name.getString(MAIN_NAME));
             sandwich.setAlsoKnownAs(convertJsonArrayToList(name.getJSONArray(ALSO_KNOWN_AS)));
+
             sandwich.setPlaceOfOrigin(root.getString(PLACE_OF_ORIGIN));
             sandwich.setDescription(root.getString(DESCRIPTION));
             sandwich.setImage(root.getString(IMAGE_URL));

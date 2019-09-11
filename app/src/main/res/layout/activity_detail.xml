@@ -25,7 +25,7 @@
                 android:contentDescription="@string/sandwich_picture_content_description"
                 android:scaleType="centerCrop" />
 
-            <!--Also known as... label of the sandwich-->
+            <!--Also known as... part of the sandwich-->
             <TextView
                 android:id="@+id/also_known_label"
                 style="@style/DetailLabelStyle"

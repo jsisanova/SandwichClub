@@ -80,16 +80,6 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI(Sandwich sandwich) {
 
-        descriptionTextView.setText(sandwich.getDescription());
-
-        // If there is not known place of origin, do not display it
-        if (sandwich.getPlaceOfOrigin().isEmpty()) {
-            placeOfOriginLabel.setVisibility(View.GONE);
-            placeOfOriginTextView.setVisibility(View.GONE);
-        } else {
-            placeOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
-        }
-
         // Get 'also known as' as a list
         List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
         // If there is nothing to show in 'also known as' list, do not display it
@@ -102,9 +92,12 @@ public class DetailActivity extends AppCompatActivity {
             for (String akaName : alsoKnownAsList) {
                 akaNames.append(akaName).append(", ");
             }
+            // Get rid of the 2 last characters, in this case ", "
             akaNames.setLength(akaNames.length() - 2);
             alsoKnownAsTextView.setText(akaNames);
         }
+
+        descriptionTextView.setText(sandwich.getDescription());
 
         // Get 'ingredients' as a list
         List<String> ingredientsList = sandwich.getIngredients();
@@ -113,8 +106,15 @@ public class DetailActivity extends AppCompatActivity {
         for (String ingredient : ingredientsList) {
             ingredients.append(ingredient).append(", ");
         }
-        // Get rid of the 2 last characters, in this case ", "
         ingredients.setLength(ingredients.length() - 2);
         ingredientsTextView.setText(ingredients);
+
+        // If there is not known place of origin, do not display it
+        if (sandwich.getPlaceOfOrigin().isEmpty()) {
+            placeOfOriginLabel.setVisibility(View.GONE);
+            placeOfOriginTextView.setVisibility(View.GONE);
+        } else {
+            placeOfOriginTextView.setText(sandwich.getPlaceOfOrigin());
+        }
     }
 }
