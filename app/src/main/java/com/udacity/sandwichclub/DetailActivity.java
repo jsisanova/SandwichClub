@@ -67,6 +67,8 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(sandwich.getImage())
                 .into(sandwichImage);
+                // Use the error() and placeholder() methods to avoid empty ImageViews while the image loads or if the load fails
+                // .placeholder(R.drawable.something);
 
         setTitle(sandwich.getMainName());
 

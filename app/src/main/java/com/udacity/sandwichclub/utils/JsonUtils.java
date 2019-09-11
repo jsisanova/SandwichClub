@@ -12,6 +12,7 @@ import java.util.List;
 // JSONUTils.java gets the json data from strings.xml
 public class JsonUtils {
 
+    // Keys
     public static final String NAME = "name";
     public static final String MAIN_NAME = "mainName";
     public static final String ALSO_KNOWN_AS = "alsoKnownAs";
@@ -29,16 +30,16 @@ public class JsonUtils {
             JSONObject root = new JSONObject(json);
 
             //get root object
-            JSONObject name = root.getJSONObject(NAME);
+            JSONObject name = root.optJSONObject(NAME);
 
             //set object values
-            sandwich.setMainName(name.getString(MAIN_NAME));
-            sandwich.setAlsoKnownAs(convertJsonArrayToList(name.getJSONArray(ALSO_KNOWN_AS)));
+            sandwich.setMainName(name.optString(MAIN_NAME));
+            sandwich.setAlsoKnownAs(convertJsonArrayToList(name.optJSONArray(ALSO_KNOWN_AS)));
 
-            sandwich.setPlaceOfOrigin(root.getString(PLACE_OF_ORIGIN));
-            sandwich.setDescription(root.getString(DESCRIPTION));
-            sandwich.setImage(root.getString(IMAGE_URL));
-            sandwich.setIngredients(convertJsonArrayToList(root.getJSONArray(INGREDIENTS)));
+            sandwich.setPlaceOfOrigin(root.optString(PLACE_OF_ORIGIN));
+            sandwich.setDescription(root.optString(DESCRIPTION));
+            sandwich.setImage(root.optString(IMAGE_URL));
+            sandwich.setIngredients(convertJsonArrayToList(root.optJSONArray(INGREDIENTS)));
 
         } catch (JSONException e) {
             e.printStackTrace();
