@@ -8,5 +8,8 @@
     <ListView
         android:id="@+id/sandwiches_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:dividerHeight="0.7dp"
+        android:divider="@color/whiteColor"/>
 </RelativeLayout>
