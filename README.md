@@ -4,7 +4,7 @@
 Sandwich Club App , created as a part of Udacity Android Developer Nanodegree Program.
 In this project, I completed the **Sandwich Club** app to show the details of each sandwich once it is selected.
 
-![image](https://user-images.githubusercontent.com/30228915/64720219-33db4080-d4ca-11e9-8ced-1c9ad8ba8b85.png)
+![image](https://user-images.githubusercontent.com/30228915/64720489-de536380-d4ca-11e9-9c74-0cdb7b48c672.png)
 
 ## Why this Project
 
