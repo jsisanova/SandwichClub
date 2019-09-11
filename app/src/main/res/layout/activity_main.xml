@@ -11,5 +11,5 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:dividerHeight="0.7dp"
-        android:divider="@color/whiteColor"/>
+        android:divider="@color/whiteColor" />
 </RelativeLayout>
