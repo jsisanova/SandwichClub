@@ -27,12 +27,13 @@ public class JsonUtils {
         // create sandwich object
         Sandwich sandwich = new Sandwich();
         try {
+            // JSONObject parsing methods e.g. get(String name) / opt(String name) - always String as input parameter
             JSONObject root = new JSONObject(json);
 
-            //get root object
+            //get root object -->
             JSONObject name = root.optJSONObject(NAME);
 
-            //set object values
+            //set object values via setter
             sandwich.setMainName(name.optString(MAIN_NAME));
             sandwich.setAlsoKnownAs(convertJsonArrayToList(name.optJSONArray(ALSO_KNOWN_AS)));
 
@@ -52,6 +53,7 @@ public class JsonUtils {
         List<String> returnedList = new ArrayList<>();
         try {
             for(int index = 0; index < jsonArray.length(); index++) {
+                // JSONArray parsing methods e.g. get(int index) - always int as input parameter
                 returnedList.add(jsonArray.getString(index));
             }
         } catch (JSONException e) {

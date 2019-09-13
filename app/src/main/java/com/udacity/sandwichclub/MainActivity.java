@@ -51,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void launchDetailActivity(int position) {
         Intent intent = new Intent(this, DetailActivity.class);
+
+        // In startActivity() , it starts a new activity of Game.class = Game.class is called
+        // and if we have to select one of position, getIntExtra() in DetailsActivity reads the position which user selected (EXTRA_POSITION) instead of DEFAULT_POSITION;
+        // (or DEFAULT_POSITION, if the activity is started through a different intent which did not set EXTRA_POSITION).
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
         startActivity(intent);
     }
